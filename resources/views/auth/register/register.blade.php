@@ -1,5 +1,15 @@
 <x-guest-layout>
   <form action="{{ route('registerPost') }}" method="POST">
+    <!-- バリデーションエラーメッセージ表示 -->
+    @if ($errors->any())
+      <div class="alert alert-danger" style="width:25%; margin:0 auto;">
+        <ul class="m-0">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
       <div class="w-25 vh-75 border p-3">
         <div class="register_form">
