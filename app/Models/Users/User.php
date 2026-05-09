@@ -4,6 +4,7 @@ namespace App\Models\Users;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Users\Subject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -77,5 +78,11 @@ class User extends Authenticatable
 
     public function likePostId(){
         return Like::where('like_user_id', Auth::id());
+    }
+
+    // 講師かどうかを判定
+    public function isTeacher(): bool
+    {
+        return in_array($this->role, [1, 2, 3]);
     }
 }

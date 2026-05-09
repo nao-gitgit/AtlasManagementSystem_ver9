@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Users\User;
 
-class Subjects extends Model
+class Subject extends Model
 {
     const UPDATED_AT = null;
-
 
     protected $fillable = [
         'subject'

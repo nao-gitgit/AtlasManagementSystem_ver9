@@ -13,7 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use DB;
 
-use App\Models\Users\Subjects;
+use App\Models\Users\Subject;
 use App\Models\Users\User;
 
 class RegisteredUserController extends Controller
@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $subjects = Subjects::all();
+        $subjects = Subject::all();
         return view('auth.register.register', compact('subjects'));
     }
 
