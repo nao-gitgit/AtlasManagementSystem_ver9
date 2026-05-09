@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use DB;
 
 use App\Models\Users\Subjects;
@@ -64,6 +65,8 @@ class RegisteredUserController extends Controller
             }
             DB::commit();
             return view('auth.login.login');
+        }catch(ValidationException $e){
+            throw $e;
         }catch(\Exception $e){
             DB::rollback();
             return redirect()->route('loginView');

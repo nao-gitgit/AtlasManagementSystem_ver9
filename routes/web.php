@@ -22,6 +22,13 @@ use App\Http\Controllers\Authenticated\Users\UsersController;
 
 require __DIR__.'/auth.php';
 
+// ルートURLへのルートを追加
+Route::get('/', function () {
+    return auth()->check()
+        ? redirect()->route('top.show') // ログイン済みの場合
+        : redirect()->route('loginView'); // 未ログインの場合
+});
+
 Route::group(['middleware' => 'auth'], function(){
     Route::namespace('Authenticated')->group(function(){
         Route::namespace('Top')->group(function(){
