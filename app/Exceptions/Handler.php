@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -50,6 +52,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // CSRFトークン切れ（419エラー）ログイン画面へ
+        if ($exception instanceof TokenMismatchException){
+            return redirect()->route('loginView')
+                ->withErrors(['message' => 'セッションがタイムアウトしました。再度ログインしてください。']);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    /**
+     * 未認証時の処理（セッション切れなど）ログイン画面へ
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()){
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest(route('loginView'));
     }
 }

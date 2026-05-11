@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Users\User;
-use App\Models\Users\Subject;
+use App\Models\Users\Subjects;
 
 class SubjectUser extends Model
 {
@@ -24,6 +24,6 @@ class SubjectUser extends Model
     // Subjectとのリレーション
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subjects::class);
     }
 }
