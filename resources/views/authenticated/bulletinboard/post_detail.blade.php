@@ -7,8 +7,11 @@
           <div>
           </div>
           <div>
+          <!-- 自分の投稿のみ編集・削除ボタンを表示 -->
+           @if(Auth::id() === $post->user_id)
             <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}">削除</a>
+            <span class="delete-modal-open" style="cursor: pointer;">削除</span>
+           @endif
           </div>
         </div>
 
@@ -51,25 +54,42 @@
     </div>
   </div>
 </div>
-<div class="modal js-modal">
+
+<!-- 編集モーダル -->
+<div class="modal js-modal" id="editModal">
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
-    <form action="{{ route('post.edit') }}" method="post">
+    <form action="{{ route('post.edit') }}" method="post" id="editForm">
+      {{ csrf_field() }}
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
-          <input type="text" name="post_title" placeholder="タイトル" class="w-100">
+          <input type="text" name="post_title" placeholder="タイトル" class="w-100" id="editPostTitle">
+          <!-- タイトルのバリデーションエラー表示 -->
+           @error('post_title')
+           <p class="text-danger">{{ $message }}</p>
+           @enderror
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
-          <textarea placeholder="投稿内容" name="post_body" class="w-100"></textarea>
+          <textarea placeholder="投稿内容" name="post_body" class="w-100" id="editPostBody"></textarea>
+          <!-- 投稿内容のバリデーションエラー表示 -->
+           @error('post_body')
+           <p class="text-danger">{{ $message }}</p>
+           @enderror
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
-          <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
+          <input type="hidden" class="edit-modal-hidden" name="post_id" id="editPostId" value="">
           <input type="submit" class="btn btn-primary d-block" value="編集">
         </div>
       </div>
-      {{ csrf_field() }}
     </form>
   </div>
 </div>
+
+<!-- 削除モーダル -->
+<form action="{{ route('post.delete') }}" method="post" id="deleteForm">
+  {{ csrf_field() }}
+  <input type="hidden" name="post_id" value="{{ $post->id }}">
+</form>
+
 </x-sidebar>

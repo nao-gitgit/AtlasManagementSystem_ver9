@@ -11,6 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\PostEditFormRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -57,7 +58,8 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function postEdit(Request $request){
+    // PostEditFormRequestでバリデーションを適用
+    public function postEdit(PostEditFormRequest $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -65,8 +67,9 @@ class PostsController extends Controller
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
 
-    public function postDelete($id){
-        Post::findOrFail($id)->delete();
+    // GETからPOSTに変更
+    public function postDelete(Request $request){
+        Post::findOrFail($request->post_id)->delete();
         return redirect()->route('post.show');
     }
     public function mainCategoryCreate(Request $request){

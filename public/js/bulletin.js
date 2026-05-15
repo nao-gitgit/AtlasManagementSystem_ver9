@@ -48,7 +48,7 @@ $(function () {
     });
   });
 
-  $('.edit-modal-open').on('click',function(){
+  $('.edit-modal-open').on('click', function () {
     $('.js-modal').fadeIn();
     var post_title = $(this).attr('post_title');
     var post_body = $(this).attr('post_body');
@@ -61,6 +61,13 @@ $(function () {
   $('.js-modal-close').on('click', function () {
     $('.js-modal').fadeOut();
     return false;
+  });
+
+  // 削除モーダル
+  $('.delete-modal-open').on('click', function () {
+    if (confirm('削除してよろしいですか？')) {
+      $('#deleteForm').submit();
+    }
   });
 
 });
