@@ -13,6 +13,7 @@ use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\PostEditFormRequest;
 use App\Http\Requests\BulletinBoard\PostCommentFormRequest;
+use App\Http\Requests\BulletinBoard\CategoryRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -46,7 +47,7 @@ class PostsController extends Controller
     }
 
     public function postInput(){
-        $main_categories = MainCategory::get();
+        $main_categories = MainCategory::with('subCategories')->get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
@@ -56,6 +57,10 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+
+        // サブカテゴリー紐付け追加
+        $post->subCategories()->attach($request->sub_category_id);
+
         return redirect()->route('post.show');
     }
 
@@ -73,8 +78,20 @@ class PostsController extends Controller
         Post::findOrFail($request->post_id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(Request $request){
-        MainCategory::create(['main_category' => $request->main_category_name]);
+
+    public function mainCategoryCreate(CategoryRequest $request){
+        MainCategory::create([
+            'main_category' => $request->main_category_name
+        ]);
+        return redirect()->route('post.input');
+    }
+
+    // サブカテゴリー追加
+    public function subCategoryCreate(CategoryRequest $request){
+        SubCategory::create([
+            'main_category_id' => $request->main_category_id,
+            'sub_category' => $request->sub_category_name,
+        ]);
         return redirect()->route('post.input');
     }
 
