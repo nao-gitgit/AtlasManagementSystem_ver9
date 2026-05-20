@@ -1,7 +1,23 @@
 $(function () {
-  $('.main_categories').click(function () {
-    var category_id = $(this).attr('category_id');
-    $('.category_num' + category_id).slideToggle();
+  // 初期状態：全サブカテゴリーを開いた状態にする
+  $('.main_category_header').addClass('is_open');
+
+  // メインカテゴリークリックで開閉
+  $('.main_category_header').click(function () {
+    var targetId = $(this).data('target');
+    var $arrow = $(this).find('.accordion_arrow');
+
+    if ($(this).hasClass('is_open')) {
+      // 閉じる
+      $('#' + targetId).slideUp(200);
+      $(this).removeClass('is_open');
+      $arrow.text('v');
+    } else {
+      // 開く
+      $('#' + targetId).slideDown(200);
+      $(this).addClass('is_open');
+      $arrow.text('∧');
+    }
   });
 
   $(document).on('click', '.like_btn', function (e) {
