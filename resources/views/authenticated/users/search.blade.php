@@ -59,7 +59,7 @@
         <input type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest">
       </div>
       <div>
-        <lavel>カテゴリ</lavel>
+        <label>カテゴリ</label>
         <select form="userSearchRequest" name="category">
           <option value="name">名前</option>
           <option value="id">社員ID</option>
@@ -73,7 +73,10 @@
         </select>
       </div>
       <div class="">
-        <p class="m-0 search_conditions"><span>検索条件の追加</span></p>
+        <p class="m-0 search_conditions">
+          <span>検索条件の追加</span>
+        <span class="toggle-arrow">▲</span>
+        </p>
         <div class="search_conditions_inner">
           <div>
             <label>性別</label>
@@ -93,14 +96,17 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
+            <span>国語</span><input type="checkbox" name="subjects[]" value="1" form="userSearchRequest">
+            <span>数学</span><input type="checkbox" name="subjects[]" value="2" form="userSearchRequest">
+            <span>英語</span><input type="checkbox" name="subjects[]" value="3" form="userSearchRequest">
           </div>
         </div>
       </div>
       <div>
-        <input type="reset" value="リセット" form="userSearchRequest">
+        <input type="submit" name="search_btn" value="検索" form="userSearchRequest" class="btn_search">
       </div>
       <div>
-        <input type="submit" name="search_btn" value="検索" form="userSearchRequest">
+        <input type="reset" value="リセット" form="userSearchRequest" class="btn_reset">
       </div>
     </div>
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
