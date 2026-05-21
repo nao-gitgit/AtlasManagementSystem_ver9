@@ -38,10 +38,14 @@ class CalendarView{
       $days = $week->getDays();
       foreach($days as $day){
         $startDay = $this->carbon->copy()->format("Y-m-01");
-        $toDay = $this->carbon->copy()->format("Y-m-d");
+        $today = date('Y-m-d');
 
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+        // 過去日をグレー背景に
+        $isPast = $day->everyDay() < $today;
+        if($day->everyDay() == $today){
           $html[] = '<td class="calendar-td">';
+        }elseif ($isPast && $day->everyDay() >= $startDay) {
+          $html[] = '<td class="calendar-td past-day">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }

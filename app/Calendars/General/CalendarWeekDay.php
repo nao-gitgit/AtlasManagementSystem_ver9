@@ -29,6 +29,27 @@ class CalendarWeekDay{
    }
 
    function selectPart($ymd){
+     // 過去日かどうか判定
+     $today = new Carbon('today');
+     $targetDay = new Carbon($ymd);
+
+     if($targetDay->lt($today)){
+      $userId = Auth::id();
+      $html = [];
+
+        $reservedPart = ReserveSettings::whereHas('users', function($q) use ($userId){
+          $q->where('user_id', $userId);
+        })->where('setting_reserve', $ymd)->first();
+
+        if($reservedPart){
+          $html[] = '<p class="m-0" style="font-size:12px; color:#1a8fe0;">リモ'.$$reservedPart->setting_part.'部 参加</p>';
+        }else{
+          $html[] = '<p class="m-0" style="font-size:12px; color:#888;">受付終了</p>';
+        }
+
+      return implode('', $html);
+     }
+
      $one_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
      $two_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
      $three_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
