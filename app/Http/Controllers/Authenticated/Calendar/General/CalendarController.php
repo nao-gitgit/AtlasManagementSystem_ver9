@@ -21,14 +21,30 @@ class CalendarController extends Controller
     public function reserve(Request $request){
         DB::beginTransaction();
         try{
-            $getPart = $request->getPart;
-            $getDate = $request->getData;
-            $reserveDays = array_filter(array_combine($getDate, $getPart));
-            foreach($reserveDays as $key => $value){
-                $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
+            $reserveParts = $request->reserveParts;
+
+            foreach($reserveParts as $date => $part){
+                if(empty($part)) continue;
+                $reserve_settings = ReserveSettings::where('setting_reserve', $date)->where('setting_part', $part)->first();
+                if(!$reserve_settings) continue;
                 $reserve_settings->decrement('limit_users');
                 $reserve_settings->users()->attach(Auth::id());
             }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
+
+    // 予約キャンセル機能
+    public function delete(Request $request){
+        DB::beginTransaction();
+        try{
+            $deleteDate = $request->delete_date;
+            $reserve_settings = ReserveSettings::where('setting_reserve', $deleteDate)->first();
+            $reserve_settings->increment('limit_users');
+            $reserve_settings->users()->detach(Auth::id());
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();

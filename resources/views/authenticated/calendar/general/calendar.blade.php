@@ -13,4 +13,21 @@
     </div>
   </div>
 </div>
+
+<!-- キャンセル確認モーダル -->
+<div class="modal fade" id="cancelModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body pt-4 pb-4 pl-4">
+        <p>予約日：<span id="modal-date"></span></p>
+        <p>時間：<span id="modal-part"></span></p>
+        <p>上記の予約をキャンセルしてもよろしいですか？</p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+        <button type="submit" class="btn btn-danger" form="deleteParts">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
 </x-sidebar>
