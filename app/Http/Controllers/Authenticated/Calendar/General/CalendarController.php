@@ -42,7 +42,8 @@ class CalendarController extends Controller
         DB::beginTransaction();
         try{
             $deleteDate = $request->delete_date;
-            $reserve_settings = ReserveSettings::where('setting_reserve', $deleteDate)->first();
+            $deletePart = $request->delete_part;
+            $reserve_settings = ReserveSettings::where('setting_reserve', $deleteDate)->where('setting_part', $deletePart)->first();
             $reserve_settings->increment('limit_users');
             $reserve_settings->users()->detach(Auth::id());
             DB::commit();

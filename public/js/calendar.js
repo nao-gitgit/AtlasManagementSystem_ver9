@@ -8,7 +8,7 @@ $(function () {
     const reservePart = $(this).text().trim();
 
     // 日付のみ取り出す
-    const date = reserveValue.replace(/-\d+$/, '');
+    const [date, part] = reserveValue.split('_');
 
     // モーダルに値をセット
     $('#modal-date').text(date);
@@ -19,7 +19,15 @@ $(function () {
       $input = $('<input>').attr({ type: 'hidden', name: 'delete_date' });
       $('#deleteParts').append($input);
     }
-    $input.val(reserveValue);
+    $input.val(date);
+
+    // partもhiddenで渡す
+    let $partInput = $('#deleteParts input[name="delete_part"]');
+    if ($partInput.length === 0) {
+      $partInput = $('<input>').attr({ type: 'hidden', name: 'delete_part' });
+      $('#deleteParts').append($partInput);
+    }
+    $partInput.val(part);
 
     $('#cancelModal').modal('show');
   });
