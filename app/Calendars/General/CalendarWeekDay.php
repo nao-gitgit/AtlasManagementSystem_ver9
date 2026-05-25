@@ -42,7 +42,7 @@ class CalendarWeekDay{
         })->where('setting_reserve', $ymd)->first();
 
         if($reservedPart){
-          $html[] = '<p class="m-0" style="font-size:12px; color:#1a8fe0;">リモ'.$$reservedPart->setting_part.'部 参加</p>';
+          $html[] = '<p class="m-0" style="font-size:12px; color:#1a8fe0;">リモ'.$reservedPart->setting_part.'部 参加</p>';
         }else{
           $html[] = '<p class="m-0" style="font-size:12px; color:#888;">受付終了</p>';
         }

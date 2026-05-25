@@ -60,11 +60,20 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
-          if($startDay <= $day->everyDay() && $today >= $day->everyDay()){
+
+          $isPast = $day->everyDay() < $today;
+
+          if($isPast){
+            // 過去の予約済み：参加した部を表示
+            $html[] = '<p class="m-0" style="font-size:12px; color:#1a8fe0;">'.$reservePart.'参加</p>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+          }elseif($startDay <= $day->everyDay() && $today >= $day->everyDay()){
+            // 今日の予約済み：空表示
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="button" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+            // 未来の予約済み：キャンセルボタン
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         }else{
