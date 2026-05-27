@@ -23,7 +23,11 @@ class CalendarWeekDay{
     return $this->carbon->format("Y-m-d");
   }
 
+  // 予約人数の表示
   function dayPartCounts($ymd){
+    $today = date('Y-m-d');
+    $isPast = $ymd < $today;
+
     $html = [];
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
@@ -31,13 +35,16 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+      $count = $one_part->users->count();
+      $html[] = '<p class="day_part m-0 pt-1">1部 ' . $count . '</p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $count = $two_part->users->count();
+      $html[] = '<p class="day_part m-0 pt-1">2部 ' . $count . '</p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $count = $three_part->users->count();
+      $html[] = '<p class="day_part m-0 pt-1">3部 ' . $count . '</p>';
     }
     $html[] = '</div>';
 
