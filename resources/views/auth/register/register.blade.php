@@ -1,7 +1,7 @@
 <x-guest-layout>
   <form action="{{ route('registerPost') }}" method="POST">
-    <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
-      <div class="w-25 vh-75 border p-3">
+    <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center; background:#ECF1F6;">
+      <div class="w-25 vh-75 p-3" style="background:#fff; border-radius:10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
         <div class="register_form">
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div class="" style="width:140px">
@@ -177,7 +177,7 @@
           <input type="submit" class="btn btn-primary register_btn" disabled value="新規登録" onclick="return confirm('登録してよろしいですか？')">
         </div>
         <div class="text-center">
-          <a href="{{ route('loginView') }}">ログイン</a>
+          <a href="{{ route('loginView') }}">ログインはこちら</a>
         </div>
       </div>
       {{ csrf_field() }}

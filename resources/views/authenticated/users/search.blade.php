@@ -1,14 +1,13 @@
 <x-sidebar>
-<p>ユーザー検索</p>
-<div class="search_content w-100 border d-flex">
+<div class="search_content w-100 d-flex">
   <div class="reserve_users_area">
     @foreach($users as $user)
-    <div class="border one_person">
+    <div class="one_person p-3" style="background:#fff; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
       <div>
         <span>ID : </span><span>{{ $user->id }}</span>
       </div>
       <div><span>名前 : </span>
-        <a href="{{ route('user.profile', ['id' => $user->id]) }}">
+        <a href="{{ route('user.profile', ['id' => $user->id]) }}" style="color:#29ABE2;">
           <span>{{ $user->over_name }}</span>
           <span>{{ $user->under_name }}</span>
         </a>
@@ -32,13 +31,13 @@
       </div>
       <div>
         @if($user->role == 1)
-        <span>権限 : </span><span>教師(国語)</span>
+        <span>役職 : </span><span>教師(国語)</span>
         @elseif($user->role == 2)
-        <span>権限 : </span><span>教師(数学)</span>
+        <span>役職 : </span><span>教師(数学)</span>
         @elseif($user->role == 3)
-        <span>権限 : </span><span>講師(英語)</span>
+        <span>役職 : </span><span>講師(英語)</span>
         @else
-        <span>権限 : </span><span>生徒</span>
+        <span>役職 : </span><span>生徒</span>
         @endif
       </div>
       <div>
@@ -53,26 +52,24 @@
     </div>
     @endforeach
   </div>
-  <div class="search_area w-25 border">
-    <div class="">
-      <div>
+
+  <div class="search_area w-25">
+    <label>検索</label>
         <input type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest">
-      </div>
-      <div>
+
         <label>カテゴリ</label>
-        <select form="userSearchRequest" name="category">
+        <select form="userSearchRequest" name="category" class="form-control mb-3">
           <option value="name">名前</option>
           <option value="id">社員ID</option>
         </select>
-      </div>
-      <div>
+
         <label>並び替え</label>
-        <select name="updown" form="userSearchRequest">
+        <select name="updown" form="userSearchRequest" class="form-control mb-3">
           <option value="ASC">昇順</option>
           <option value="DESC">降順</option>
         </select>
-      </div>
-      <div class="">
+
+      <div>
         <p class="m-0 search_conditions">
           <span>検索条件の追加</span>
         <span class="toggle-arrow">▲</span>
@@ -86,12 +83,12 @@
           </div>
           <div>
             <label>権限</label>
-            <select name="role" form="userSearchRequest" class="engineer">
+            <select name="role" form="userSearchRequest" class="form-control engineer">
               <option selected disabled>----</option>
               <option value="1">教師(国語)</option>
               <option value="2">教師(数学)</option>
               <option value="3">教師(英語)</option>
-              <option value="4" class="">生徒</option>
+              <option value="4">生徒</option>
             </select>
           </div>
           <div class="selected_engineer">
@@ -102,13 +99,10 @@
           </div>
         </div>
       </div>
-      <div>
+
         <input type="submit" name="search_btn" value="検索" form="userSearchRequest" class="btn_search">
-      </div>
-      <div>
         <input type="reset" value="リセット" form="userSearchRequest" class="btn_reset">
-      </div>
-    </div>
+
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
   </div>
 </div>

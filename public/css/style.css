@@ -18,10 +18,11 @@ li {
 
 /* サイドバー */
 .sidebar {
-  width: 150px;
+  width: 180px;
   height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
+  padding-top: 20px;
 }
 
 .main-container {
@@ -36,6 +37,7 @@ li {
 .user_status {
   border-radius: 10px;
   background: #FFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* スクール予約関連 */
@@ -236,8 +238,9 @@ li {
 
 /* メインカテゴリー1件分 */
 .main_category_item {
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
 }
 
 /* メインカテゴリー見出し行 */
@@ -246,12 +249,13 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 6px 10px;
-  background-color: #fff;
+  background-color: #ECF1F6;
   cursor: pointer;
+  border-bottom: 1px solid #ddd;
 }
 
 .main_category_header:hover {
-  background-color: #f5f5f5;
+  background-color: #dde4ed;
 }
 
 /* サブカテゴリーリスト */
@@ -263,7 +267,8 @@ li {
 
 /* サブカテゴリー1件 */
 .sub_category_list li {
-  border-top: 1px solid #eee;
+  border-top: none;
+  border-bottom: 1px solid #ddd;
 }
 
 /* サブカテゴリーボタン */
@@ -290,10 +295,13 @@ li {
   width: 800px;
   margin: 10px auto;
   height: 80vh;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 10px;
-  background: #FFF;
-  border-radius: 5px;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  gap: 12px;
+  align-content: flex-start;
 }
 
 .reserve_users_area span {
@@ -302,7 +310,7 @@ li {
 
 .one_person {
   width: 250px;
-  height: 250px;
+  height: 220px;
 }
 
 .search_conditions {
@@ -314,7 +322,7 @@ li {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 4px 4px 0 0;
-  background: #fff;
+  background: #ECF1F6;
   margin-top: 10px;
 }
 
@@ -327,7 +335,7 @@ li {
   border-top: none;
   border-radius: 0 0 4px 4px;
   padding: 12px;
-  background: #fff;
+  background: #ECF1F6;
   font-size: 13px;
   margin-bottom: 14px;
 }
@@ -340,7 +348,8 @@ li {
 
 .search_area {
   padding: 16px;
-  background: #f0f4f8;
+  background: #ECF1F6;
+  border: none;
 }
 
 .search_area label {

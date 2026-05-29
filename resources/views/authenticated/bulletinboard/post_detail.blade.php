@@ -9,10 +9,17 @@
           <div>
           <!-- 自分の投稿のみ編集・削除ボタンを表示 -->
            @if(Auth::id() === $post->user_id)
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <span class="delete-modal-open" style="cursor: pointer;">削除</span>
+            <button class="btn btn-primary btn-sm edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</button>
+            <button class="btn btn-danger btn-sm delete-modal-open" style="cursor: pointer;">削除</button>
            @endif
           </div>
+        </div>
+
+        <!-- サブカテゴリータグ -->
+        <div class="mb-2">
+          @foreach($post->subCategories as $sub)
+          <span class="category_box mr-1" style="background:#29ABE2; font-size:12px; padding:4px 8px;">{{ $sub->sub_category }}</span>
+          @endforeach
         </div>
 
         <div class="contributor d-flex">
@@ -53,7 +60,9 @@
           {{ csrf_field() }}
           <textarea class="w-100" name="comment"></textarea>
           <input type="hidden" name="post_id" value="{{ $post->id }}">
+          <div class="text-right">
           <input type="submit" class="btn btn-primary" value="投稿">
+          </div>
         </form>
       </div>
     </div>

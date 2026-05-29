@@ -20,16 +20,16 @@
     <body class="all_content">
         <div class="d-flex">
             <div class="sidebar">
-                <p><a href="{{ route('top.show') }}">トップ</a></p>
-                <p><a href="/logout">ログアウト</a></p>
-                <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
+                <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/icon_mypage.png') }}" width="20" class="mr-1">マイページ</a></p>
+                <p><a href="/logout"><img src="{{ asset('image/icon_logout.png') }}" width="20" class="mr-1">ログアウト</a></p>
+                <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/icon_calendar.png') }}" width="20" class="mr-1">スクール予約</a></p>
                 <!-- 講師アカウントのみ表示されるようにする -->
                 @if(Auth::user()->isTeacher())
-                    <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-                    <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
+                    <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/icon_calendar_check.png') }}" width="20" class="mr-1">スクール予約確認</a></p>
+                    <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/icon_calendar_add.png') }}" width="20" class="mr-1">スクール枠登録</a></p>
                 @endif
-                <p><a href="{{ route('post.show') }}">掲示板</a></p>
-                <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
+                <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/icon_board.png') }}" width="20" class="mr-1">掲示板</a></p>
+                <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/icon_users.png') }}" width="20" class="mr-1">ユーザー検索</a></p>
             </div>
             <div class="main-container">
                 {{ $slot }}
