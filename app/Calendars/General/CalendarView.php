@@ -65,7 +65,7 @@ class CalendarView{
 
           if($isPast){
             // 過去の予約済み：参加した部を表示
-            $html[] = '<p class="m-0" style="font-size:12px; color:#1a8fe0;">'.$reservePart.'参加</p>';
+            $html[] = '<p class="m-0" style="font-size:12px; color:#888;">'.$reservePart.'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }elseif($startDay <= $day->everyDay() && $today >= $day->everyDay()){
             // 今日の予約済み：空表示
