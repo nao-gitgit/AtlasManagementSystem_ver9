@@ -292,7 +292,7 @@ li {
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
+  width: 100%;
   margin: 10px auto;
   height: 80vh;
   overflow-y: scroll;
@@ -300,7 +300,6 @@ li {
   background: transparent;
   border-radius: 0;
   border: none;
-  gap: 12px;
   align-content: flex-start;
 }
 
@@ -309,7 +308,6 @@ li {
 }
 
 .one_person {
-  width: 250px;
   height: 220px;
 }
 

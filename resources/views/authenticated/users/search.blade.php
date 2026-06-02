@@ -1,8 +1,9 @@
 <x-sidebar>
 <div class="search_content w-100 d-flex">
-  <div class="reserve_users_area">
+  <div class="reserve_users_area row w-100 m-0">
     @foreach($users as $user)
-    <div class="one_person p-3" style="background:#fff; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+    <div class="col-md-3 mb-4">
+    <div class="one_person p-3 h-100" style="background:#fff; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
       <div>
         <span>ID : </span><span>{{ $user->id }}</span>
       </div>
@@ -48,6 +49,7 @@
         <span>{{ $subject->subject }}</span>
         @endforeach
         @endif
+      </div>
       </div>
     </div>
     @endforeach
