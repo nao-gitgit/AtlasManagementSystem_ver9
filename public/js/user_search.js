@@ -4,7 +4,7 @@ $(function () {
 
     // 矢印の切り替え
     const arrow = $(this).find('.toggle-arrow');
-    arrow.text(arrow.text() === '▲' ? '▽' : '▲');
+    arrow.text(arrow.text() === '∧' ? 'v' : '∧');
   });
 
   $('.subject_edit_btn').click(function () {

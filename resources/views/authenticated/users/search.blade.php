@@ -72,9 +72,9 @@
       <div>
         <p class="m-0 search_conditions">
           <span>検索条件の追加</span>
-        <span class="toggle-arrow">▲</span>
+        <span class="toggle-arrow">v</span>
         </p>
-        <div class="search_conditions_inner">
+        <div class="search_conditions_inner" style="display: none;">
           <div>
             <label>性別</label>
             <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
