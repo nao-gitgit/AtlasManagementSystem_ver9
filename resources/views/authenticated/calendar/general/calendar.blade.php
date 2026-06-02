@@ -23,7 +23,7 @@
         <p>時間：<span id="modal-part"></span></p>
         <p>上記の予約をキャンセルしてもよろしいですか？</p>
       </div>
-      <div class="modal-footer border-0">
+      <div class="modal-footer border-0 justify-content-between">
         <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
         <button type="submit" class="btn btn-danger" form="deleteParts">キャンセル</button>
       </div>
