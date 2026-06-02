@@ -1,19 +1,16 @@
 $(function () {
-  // 初期状態：全サブカテゴリーを開いた状態にする
-  $('.main_category_header').addClass('is_open');
-
   // メインカテゴリークリックで開閉
   $('.main_category_header').click(function () {
     var targetId = $(this).data('target');
     var $arrow = $(this).find('.accordion_arrow');
 
     if ($(this).hasClass('is_open')) {
-      // 閉じる
+      // 開く
       $('#' + targetId).slideUp(200);
       $(this).removeClass('is_open');
       $arrow.text('v');
     } else {
-      // 開く
+      // 閉じる
       $('#' + targetId).slideDown(200);
       $(this).addClass('is_open');
       $arrow.text('∧');

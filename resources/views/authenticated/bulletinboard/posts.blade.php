@@ -54,10 +54,10 @@
         <div class="main_category_item">
           <div class="main_category_header" data-target="sub_{{ $main->id }}">
             <span>{{ $main->main_category }}</span>
-            <span class="accordion_arrow">^</span>
+            <span class="accordion_arrow">v</span>
           </div>
           <!-- サブカテゴリー -->
-          <ul id="sub_{{ $main->id }}" class="sub_category_list">
+          <ul id="sub_{{ $main->id }}" class="sub_category_list" style="display: none;">
             @foreach($main->subCategories as $sub)
             <li>
               <button type="submit" name="sub_category_id" value="{{ $sub->id }}" form="postSearchRequest">
