@@ -137,8 +137,8 @@
             <option value="30">30</option>
             <option value="31">31</option>
           </select>
-          </div>
           <label style="font-size:13px; margin:0 0 0 2px; white-space:nowrap;">日</label>
+          </div>
         </div>
         <div class="mt-3">
           @error('role')<span class="text-danger" style="font-size:11px">{{ $message }}</span>@enderror
